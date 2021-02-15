@@ -1,3 +1,5 @@
+import axios from 'axios'
+
 const Card = (article) => {
   // TASK 5
   // ---------------------
@@ -31,7 +33,7 @@ const Card = (article) => {
   card.appendChild(author)
   author.appendChild(imgContainer)
   imgContainer.appendChild(img)
-  card.appendChild(authorName)
+  author.appendChild(authorName)
 
   card.className = 'card'
   headline.className = 'headline'
@@ -40,7 +42,7 @@ const Card = (article) => {
 
   headline.textContent = article.headline
   img.src = article.authorPhoto
-  authorName.textContent = article.authorName
+  authorName.textContent = `By ${article.authorName}`
 
   return card
 
@@ -60,6 +62,12 @@ const cardAppender = (selector) => {
 
   const cardContainer = document.querySelector(selector)
 
+  axios
+  .get(`https://lambda-times-api.herokuapp.com/articles`)
+  .then(res => {
+    const cardArray = res.data.articles
+    console.log(res.data)
+  })
   
 }
 

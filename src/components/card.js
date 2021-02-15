@@ -65,8 +65,22 @@ const cardAppender = (selector) => {
   axios
   .get(`https://lambda-times-api.herokuapp.com/articles`)
   .then(res => {
-    const cardArray = res.data.articles
-    console.log(res.data)
+    console.log(res.data.articles)
+    // let keys = Object.keys(res.data.articles)
+    // let values = Object.values(res.data.articles)
+    let entries = Object.entries(res.data.articles)
+    // console.log(keys)
+    // console.log(values)
+    console.log(entries)
+    
+    
+    for (let i = 0; i < entries.length; i++){
+      for (let j = 0; j < entries[i][1].length; j++){
+        cardContainer.appendChild(Card(entries[i][1][j]))
+      }
+    }
+    return cardContainer
+    
   })
   
 }
